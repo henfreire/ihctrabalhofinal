@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function BottomAppBar() {
   const classes = useStyles();
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   return (
     <React.Fragment>
       <CssBaseline />
