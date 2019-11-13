@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,41 +19,49 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import FaceIcon from '@material-ui/icons/Face';
+import Modal from 'components/Modal'
 const messages = [
   {
     id: 1,
     primary: 'Mariana Santos',
     secondary: "Sou apaixonada pela natureza",
+    nota: 78
   },
   {
     id: 2,
     primary: 'José Aleberto',
     secondary: `Eu me preocupo muito com o meio ambiente`,
+    nota: 90
   },
   {
     id: 3,
     primary: 'Ana Luiza',
     secondary: 'Fazer sua parte já incrível',
+    nota: 67
   },
   {
     id: 4,
     primary: 'Helen Rocha',
     secondary: "Sou apaixonada pela natureza e por animais",
+    nota: 99
   },
   {
     id: 5,
     primary: 'Maurício Pires',
     secondary: `Eu me preocupo muito com o meio ambiente e com todos`,
+    nota: 97
   },
   {
     id: 6,
     primary: 'Maria Helena',
     secondary: "Sou apaixonada pela natureza e por animais",
+    nota: 67
   },
   {
     id: 7,
     primary: 'João Paulo',
     secondary: `Eu me preocupo muito com o meio ambiente e com todos`,
+    nota: 90
   }
 ];
 
@@ -87,29 +95,33 @@ const useStyles = makeStyles(theme => ({
   },
   fraseNatureza:{
       textAlign: 'center',
-      width: '100%'
+      width: '100%',
+      color:'#fff'
   }
 }));
 
 export default function BottomAppBar() {
   const classes = useStyles();
-
+  const [open, setOpen] = useState(true)
   return (
     <React.Fragment>
       <CssBaseline />
       <Paper square className={classes.paper}>
         <Typography className={classes.text} variant="h5" gutterBottom>
-          Eu ❤️ Natureza
+          O quanto eu me importo com a natureza
         </Typography>
         <List className={classes.list}>
-          {messages.map(({ id, primary, secondary, person }) => (
+          {messages.map(({ id, primary, secondary, person, nota }) => (
             <React.Fragment key={id}>
               {id === 1 && <ListSubheader className={classes.subheader}>Últimas Respostas</ListSubheader>}
               <ListItem button>
                 <ListItemAvatar>
                   <FaceIcon/>
                 </ListItemAvatar>
+                <div className="d-flex w-100">
                 <ListItemText primary={primary} secondary={secondary} />
+                <Avatar className={classes.avatar} >{nota}</Avatar>
+                </div>
               </ListItem>
             </React.Fragment>
           ))}
@@ -117,7 +129,7 @@ export default function BottomAppBar() {
       </Paper>
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
-          <Fab color="secondary" aria-label="add" className={classes.fabButton}>
+          <Fab color="secondary" aria-label="add" className={classes.fabButton} onClick={()=> setOpen(true)}>
             <PlayArrowIcon />
            
           </Fab>
@@ -127,6 +139,7 @@ export default function BottomAppBar() {
           <div className={classes.grow} />
         </Toolbar>
       </AppBar>
+      <Modal open={open} onClose={()=> setOpen(false)}/>
     </React.Fragment>
   );
 }
