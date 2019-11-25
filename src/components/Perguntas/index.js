@@ -66,9 +66,9 @@ function getStepContent(step) {
 }
 
 function getStatus(nota){
-    if(nota < 50 ) return "Você tem muito a melhorar";
-    else if(nota < 50 ) return "Você está no caminho certo";
-    else if(nota < 90 ) return "Você já é quase um ativista do meio ambiente";
+    if(nota < 30 ) return "Você tem muito a melhorar";
+    else if(nota >= 30 && nota < 70 ) return "Você está no caminho certo";
+    else if(nota >= 70 && nota < 90 ) return "Você já é quase um ativista do meio ambiente";
     else return "Você ama muito a natureza parabéns!";
 }
 const opcoes = [[10, 5, 3, 2],[10, 5, 3, 2]];
